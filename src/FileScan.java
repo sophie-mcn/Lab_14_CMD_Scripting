@@ -19,6 +19,7 @@ public class FileScan {
                 selectedFile = new File(args[0]);
                 if (!selectedFile.exists()) {
                     JOptionPane.showMessageDialog(null, "Please select a file");
+                    return;
                 }
             } else {
                 File workingDir = new File(System.getProperty("user.dir"));
@@ -28,12 +29,13 @@ public class FileScan {
                     selectedFile = chooser.getSelectedFile();
                 } else {
                     System.out.println("No file selected ... exiting. \nRun the program again and select a file.");
+                    return;
                 }
             }
             Path file = selectedFile.toPath();
 
-            InputStream in;
-            in = new BufferedInputStream(Files.newInputStream(file, CREATE));
+            InputStream in =
+                 new BufferedInputStream(Files.newInputStream(file, CREATE));
             BufferedReader reader =
                     new BufferedReader(new InputStreamReader(in));
 
